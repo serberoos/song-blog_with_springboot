@@ -29,7 +29,7 @@ public class Reply { //답변 테이블
 	
 	@Column(nullable = false, length = 200)
 	private String content;
-	// 누가? 어느테이블에? 연관관계가 필요하다.
+	// 누가? 어느 테이블에? 연관 관계가 필요하다.
 	
 	@ManyToOne //여러 답변은 하나의 게시글에 적용될 수 있다.
 	@JoinColumn(name="boardId")
