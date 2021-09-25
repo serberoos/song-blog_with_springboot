@@ -1,9 +1,14 @@
 package com.song.springboot_blog.test;
 
 
+import java.util.List;
 import java.util.function.Supplier;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,6 +24,20 @@ public class DummyControllerTest {
 	@Autowired //DummyControllerTest가 메모리에 뜰때, 같이 뜬다. (의존성 주입)DI
 	private UserRepository userRepository;
 	
+	//http://localhost:8000/blog/dummy/users
+	@GetMapping("/dummy/users")
+	public List<User> list(){
+		return userRepository.findAll();
+	}
+	// 한페이지당 2건에 데이터를 리턴 받아 볼 예정
+	// user = 전체 user?page=0~... 하면 페이징 가능
+	@GetMapping("/dummy/user")
+	public List<User> pageList(@PageableDefault(size=2, sort="id", direction = Sort.Direction.DESC) Pageable pageable){
+		Page<User> pagingUser = userRepository.findAll(pageable);
+		
+		List<User> users = pagingUser.getContent();
+		return users;
+	}
 	// {id} 주소로 파라미터를 전달 받을 수 있다.
 	// http://localhost:8000/blog/dummy/user/3
 	@GetMapping("/dummy/user/{id}")
@@ -54,11 +73,11 @@ public class DummyControllerTest {
 	@PostMapping("/dummy/join") //key=value(약속된 규칙 : x-www-form-urlencoded
 	public String join(User user) {
 		System.out.println("id:"+user.getId());
-		System.out.println("username"+user.getUsername());
-		System.out.println("password"+user.getPassword());
-		System.out.println("email"+user.getEmail());
-		System.out.println("role:"+user.getRole());
-		System.out.println("createDate:"+user.getCreateDate());
+		System.out.println("username: "+user.getUsername());
+		System.out.println("password: "+user.getPassword());
+		System.out.println("email: "+user.getEmail());
+		System.out.println("role: "+user.getRole());
+		System.out.println("createDate: "+user.getCreateDate());
 		
 		
 		user.setRole(RoleType.USER); //이런식으로 enum을 이용하도록 하면 개발자의 실수를 줄일 수 있다.
