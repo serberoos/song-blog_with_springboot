@@ -4,6 +4,8 @@ package com.song.springboot_blog.test;
 import java.util.List;
 import java.util.function.Supplier;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -12,6 +14,8 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.song.springboot_blog.model.RoleType;
@@ -23,6 +27,35 @@ public class DummyControllerTest {
 	
 	@Autowired //DummyControllerTest가 메모리에 뜰때, 같이 뜬다. (의존성 주입)DI
 	private UserRepository userRepository;
+	
+	//save함수는 id를 전달하지 않으면 insert를 해주고
+	//save함수는 id를 전달하면 해당 id에 대한 데이터가 있으면 update를 해주고
+	//save함수는 id를 전달하면 해당 id에 대한 데이터가 없으면 insert를 해준다.
+	// email, password
+	@Transactional // save함수를 쓸 필요없이 이 어노테이션을 붙이면 된다. => 이 방식을 더티 체킹이라고 한다.
+	@PutMapping("/dummy/user/{id}")
+	public User updateUser(@PathVariable int id, @RequestBody User requestUser) { // json 데이터를 요청 => Java Object(MessageConverter의 Jackson 라이브러리가 변환해서 받아줘요.
+		System.out.println("id :"+id);
+		System.out.println("password :" + requestUser.getPassword());
+		System.out.println("email: " + requestUser.getEmail());
+		
+		// save로 update를 수행하려면 아래처럼 람다 식을 사용해야함.
+		User user = userRepository.findById(id).orElseThrow(()->{
+			return new IllegalArgumentException("수정에 실패하였습니다.");
+		});
+		user.setPassword(requestUser.getPassword());
+		user.setEmail(requestUser.getEmail());
+//		requestUser.setId(id);
+//		requestUser.setUsername("song");
+		//userRepository.save(user); <- save함수를 쓰는 것 말고 더 좋은 방법이 있음.
+		//save함수는 원래 insert할 때 쓰는건데, 들어간 값에 id가 있으면 update 시켜준다.
+		//하지만 이 경우 password와 email만 값이 있어서 다른 값들은 null로 변해버린다.
+		//따라서 save로 update를 하려면 null 값을 채워주는 작업이 필요하다.
+		
+		// 더티 체킹 : Transaction 어노테이션을 걸면 데이터베이스에서 select를 해서 JPA 담은 후 그 값만 변경한 후 값이 바로 update된다.
+		return null;
+		
+	}
 	
 	//http://localhost:8000/blog/dummy/users
 	@GetMapping("/dummy/users")
