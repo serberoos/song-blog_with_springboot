@@ -7,18 +7,12 @@ import java.util.function.Supplier;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-<<<<<<< HEAD
 import org.springframework.dao.EmptyResultDataAccessException;
-=======
->>>>>>> bf29de8aee6489869ed04e5f1eabd8191ea15529
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
-<<<<<<< HEAD
 import org.springframework.web.bind.annotation.DeleteMapping;
-=======
->>>>>>> bf29de8aee6489869ed04e5f1eabd8191ea15529
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -40,8 +34,6 @@ public class DummyControllerTest {
 	//save함수는 id를 전달하면 해당 id에 대한 데이터가 있으면 update를 해주고
 	//save함수는 id를 전달하면 해당 id에 대한 데이터가 없으면 insert를 해준다.
 	// email, password
-<<<<<<< HEAD
-<<<<<<< HEAD
 	
 	@DeleteMapping("/dummy/user/{id}")
 	public String delete(@PathVariable int id) {
@@ -55,11 +47,7 @@ public class DummyControllerTest {
 		return "삭제 되었습니다. id:"+id;
 		
 	}
-	
-=======
->>>>>>> bf29de8aee6489869ed04e5f1eabd8191ea15529
-=======
->>>>>>> bf29de8aee6489869ed04e5f1eabd8191ea15529
+
 	@Transactional // save함수를 쓸 필요없이 이 어노테이션을 붙이면 된다. => 이 방식을 더티 체킹이라고 한다.
 	@PutMapping("/dummy/user/{id}")
 	public User updateUser(@PathVariable int id, @RequestBody User requestUser) { // json 데이터를 요청 => Java Object(MessageConverter의 Jackson 라이브러리가 변환해서 받아줘요.
