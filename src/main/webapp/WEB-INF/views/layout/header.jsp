@@ -18,8 +18,8 @@
 		</button>
 		<div class="collapse navbar-collapse" id="collapsibleNavbar">
 			<ul class="navbar-nav">
-				<li class="nav-item"><a class="nav-link" href="/user/loginForm">로그인</a></li>
-				<li class="nav-item"><a class="nav-link" href="/user/joinForm">회원가입</a></li>
+				<li class="nav-item"><a class="nav-link" href="/blog/user/loginForm">로그인</a></li>
+				<li class="nav-item"><a class="nav-link" href="/blog/user/joinForm">회원가입</a></li>
 			</ul>
 		</div>
 	</nav>
