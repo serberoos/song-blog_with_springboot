@@ -23,7 +23,7 @@ public class UserApiController {
 	 * @Autowired private HttpSession session; // 스프링 컨트롤러에서 기본으로 가지고 있다. 따라서
 	 * Autowired로 가져올 수 있음.
 	 */	
-	@PostMapping("/api/user")
+	@PostMapping("/auth/joinProc")
 	public ResponseDto<Integer> save(@RequestBody User user) { // username, password, email
 		System.out.println("UserApiController : save 호출됨.");
 		// 실제로 DB에 insert를 하고 아래에서 return이 되면 된다.
