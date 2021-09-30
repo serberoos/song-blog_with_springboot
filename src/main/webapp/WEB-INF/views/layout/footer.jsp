@@ -3,7 +3,7 @@
 <div class="jumbotron text-center" style="margin-bottom: 0">
 	<p>Created by Song</p>
 	<p>📞 010-1111-2222</p>
-	<p>🏴 서울 특별시 xx구</p>
+	<p>🏴 의정부시</p>
 </div>
 </body>
 </html>
