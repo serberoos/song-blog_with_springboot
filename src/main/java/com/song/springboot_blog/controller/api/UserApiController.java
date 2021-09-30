@@ -19,9 +19,10 @@ public class UserApiController {
 	@Autowired
 	private UserService userService;
 	
-	@Autowired
-	private HttpSession session; // 스프링 컨트롤러에서 기본으로 가지고 있다. 따라서 Autowired로 가져올 수 있음.
-	
+	/*
+	 * @Autowired private HttpSession session; // 스프링 컨트롤러에서 기본으로 가지고 있다. 따라서
+	 * Autowired로 가져올 수 있음.
+	 */	
 	@PostMapping("/api/user")
 	public ResponseDto<Integer> save(@RequestBody User user) { // username, password, email
 		System.out.println("UserApiController : save 호출됨.");
@@ -31,15 +32,15 @@ public class UserApiController {
 		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);// OK is 200
 	}
 
-	// 이러한 방식은 스프링 전통적인 방식으로 요즘은 스프링 시큐리티를 이용해서 로그인을 구현한다.
-	@PostMapping("api/user/login")
-	public ResponseDto<Integer> login(@RequestBody User user) { //, HttpSession session 파라미터를 추가해 쓸 수도 있다.
-		System.out.println("User ApiController : login 호출됨");
-		User principal = userService.로그인(user); // principal 접근 주체
-
-		if (principal != null) {
-			session.setAttribute("principal",principal);
-		}
-		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
-	}
+	/*
+	 * // 이러한 방식은 스프링 전통적인 방식으로 요즘은 스프링 시큐리티를 이용해서 로그인을 구현한다.
+	 * 
+	 * @PostMapping("api/user/login") public ResponseDto<Integer> login(@RequestBody
+	 * User user) { //, HttpSession session 파라미터를 추가해 쓸 수도 있다.
+	 * System.out.println("User ApiController : login 호출됨"); User principal =
+	 * userService.로그인(user); // principal 접근 주체
+	 * 
+	 * if (principal != null) { session.setAttribute("principal",principal); }
+	 * return new ResponseDto<Integer>(HttpStatus.OK.value(), 1); }
+	 */
 }
