@@ -1,9 +1,11 @@
 package com.song.springboot_blog.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.song.springboot_blog.model.RoleType;
 import com.song.springboot_blog.model.User;
 import com.song.springboot_blog.repository.UserRepository;
 
@@ -13,10 +15,16 @@ public class UserService {
 
 	@Autowired
 	private UserRepository userRepository;
-
+	
+	@Autowired // DI 주인이 된다.
+	private BCryptPasswordEncoder encoder;
+	
 	@Transactional // 여러 트랜잭션이 모여서 하나의 서비스가 될 수 있다.
 	public void 회원가입(User user) { // 전체 트랜잭션 들이 성공하면 업데이트가 되고 실패하면 롤백이 될 것이다.
-
+		String rawPassword = user.getPassword(); //1234 원문
+		String encPassword = encoder.encode(rawPassword); //해쉬
+		user.setPassword(encPassword);
+		user.setRole(RoleType.USER);
 		userRepository.save(user);
 	}
 	

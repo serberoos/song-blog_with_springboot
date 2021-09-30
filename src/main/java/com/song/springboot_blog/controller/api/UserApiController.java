@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.song.springboot_blog.dto.ResponseDto;
-import com.song.springboot_blog.model.RoleType;
 import com.song.springboot_blog.model.User;
 import com.song.springboot_blog.service.UserService;
 
@@ -23,11 +22,15 @@ public class UserApiController {
 	 * @Autowired private HttpSession session; // 스프링 컨트롤러에서 기본으로 가지고 있다. 따라서
 	 * Autowired로 가져올 수 있음.
 	 */	
+	
+
+	
 	@PostMapping("/auth/joinProc")
 	public ResponseDto<Integer> save(@RequestBody User user) { // username, password, email
 		System.out.println("UserApiController : save 호출됨.");
+	
 		// 실제로 DB에 insert를 하고 아래에서 return이 되면 된다.
-		user.setRole(RoleType.USER);
+
 		userService.회원가입(user); // result = 1 성공 , result = -1 실패
 		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);// OK is 200
 	}
