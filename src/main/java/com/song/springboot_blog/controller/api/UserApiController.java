@@ -1,7 +1,5 @@
 package com.song.springboot_blog.controller.api;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,18 +15,16 @@ public class UserApiController {
 
 	@Autowired
 	private UserService userService;
-	
+
 	/*
 	 * @Autowired private HttpSession session; // 스프링 컨트롤러에서 기본으로 가지고 있다. 따라서
 	 * Autowired로 가져올 수 있음.
-	 */	
-	
+	 */
 
-	
 	@PostMapping("/auth/joinProc")
 	public ResponseDto<Integer> save(@RequestBody User user) { // username, password, email
 		System.out.println("UserApiController : save 호출됨.");
-	
+
 		// 실제로 DB에 insert를 하고 아래에서 return이 되면 된다.
 
 		userService.회원가입(user); // result = 1 성공 , result = -1 실패
