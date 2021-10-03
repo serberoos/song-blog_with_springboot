@@ -6,4 +6,3 @@ import com.song.springboot_blog.model.Board;
 
 public interface BoardRepository extends JpaRepository<Board, Integer> {
 }
-s
