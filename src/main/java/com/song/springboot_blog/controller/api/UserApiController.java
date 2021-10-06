@@ -3,6 +3,7 @@ package com.song.springboot_blog.controller.api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -33,13 +34,22 @@ public class UserApiController {
 
 	/*
 	 * // 이러한 방식은 스프링 전통적인 방식으로 요즘은 스프링 시큐리티를 이용해서 로그인을 구현한다.
-	 * 
+	 *
 	 * @PostMapping("api/user/login") public ResponseDto<Integer> login(@RequestBody
 	 * User user) { //, HttpSession session 파라미터를 추가해 쓸 수도 있다.
 	 * System.out.println("User ApiController : login 호출됨"); User principal =
 	 * userService.로그인(user); // principal 접근 주체
-	 * 
+	 *
 	 * if (principal != null) { session.setAttribute("principal",principal); }
 	 * return new ResponseDto<Integer>(HttpStatus.OK.value(), 1); }
 	 */
+
+	@PutMapping("/user")
+	public ResponseDto<Integer> update(@RequestBody User user) { // password, email
+		System.out.println("UserApiController : update 호출됨.");
+
+		userService.회원정보수정(user); // result = 1 성공 , result = -1 실패
+		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);// OK is 200
+	}
+
 }

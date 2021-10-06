@@ -7,6 +7,9 @@ let index = {
 		$("#btn-login").on("click",()=> {
 			this.login();
 		});*/
+		$("#btn-update").on("click", ()=>   {
+			this.update();
+		});
 	},
 
 
@@ -62,6 +65,26 @@ let index = {
 			alert(JSON.stringify(error));	
 		}); 
 	}*/
+	update: function() {
+		let data = {
+			id: $("#id").val(),
+			password: $("#password").val(),
+			email: $("#email").val()
+		};
+
+		$.ajax({
+			type: "PUT",
+			url: "/user",
+			data: JSON.stringify(data),
+			contentType: "application/json; charset=utf-8",
+		}).done(function(resp) {
+			alert("회원 정보 수정이 완료 되었습니다.");
+			console.log(resp);
+			location.href = "/";
+		}).fail(function(error) {
+			alert(JSON.stringify(error));
+		});
+	},
 }
 
 index.init();
