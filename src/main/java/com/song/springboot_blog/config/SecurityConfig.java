@@ -21,7 +21,13 @@ import com.song.springboot_blog.auth.PrincipalDetailService;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private PrincipalDetailService principalDetailService;
-	
+
+	@Bean
+	@Override
+	public AuthenticationManager authenticationManagerBean() throws Exception{
+		return super.authenticationManagerBean();
+	}
+
 	@Bean //IoC가 된다. => 리턴값을 스프링이 관리한다.
 	public BCryptPasswordEncoder encodePWD() {
 	
