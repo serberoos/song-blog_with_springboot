@@ -47,7 +47,9 @@ public class User {
 	@Enumerated(EnumType.STRING)
 	private RoleType role; //Enum을 쓰는게 좋다. // admin, user, manager 권한 타입이 스트링이면 이상한 값이 들어갈 수 있다. 도메인 : 어떤 범위가 정해졌다. 
 	// ADMIN, USER
-	
+
+	private String oauth; // kakao, google
+
 	@CreationTimestamp //시간이 자동 입력
 	private Timestamp createDate;
 }
