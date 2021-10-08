@@ -13,6 +13,8 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.util.List;
@@ -54,7 +56,8 @@ public class Board {
 	// LAZY 전략 필요할 때 들고 와 하지만 Board들고 올때 다른것도 다 들고와야 되기 때문에 EAGER 전략으로 바꾸어주어야 한다.
 	// fetch = FetchType.LAZY => EAGER
 	// @JoinColumn(name="replyId") FK는 DB에 있어야 한다. 원자성이 깨짐
-	private List<Reply> reply; // board를 select할 때, FK를 이용해서 값을 얻기 위한 것이다.
+	@JsonIgnoreProperties({"board","user"})
+	private List<Reply> replys; // board를 select할 때, FK를 이용해서 값을 얻기 위한 것이다.
 
 	@CreationTimestamp
 	private Timestamp createDate;
