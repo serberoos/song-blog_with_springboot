@@ -26,7 +26,7 @@ public class ReplyControllerTest {
     }
 
     @GetMapping("/test/reply")
-    public List<Reply> getReply(@PathVariable int id){ //이런식으로 다이렉트로 접근하면 board 테이블도 함께 준다. 
+    public List<Reply> getReply(@PathVariable int id){ //이런식으로 다이렉트로 접근하면 board 테이블도 함께 준다.
         return replyRepository.findAll(); //jackson 라이브러리
         // (오브젝트를 json으로 리턴) => 모델의 Getter를 호출한다.
     }

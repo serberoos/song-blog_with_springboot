@@ -2,16 +2,7 @@ package com.song.springboot_blog.model;
 
 import java.sql.Timestamp;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -57,6 +48,7 @@ public class Board {
 	// fetch = FetchType.LAZY => EAGER
 	// @JoinColumn(name="replyId") FK는 DB에 있어야 한다. 원자성이 깨짐
 	@JsonIgnoreProperties({"board","user"})
+	@OrderBy("id desc")
 	private List<Reply> replys; // board를 select할 때, FK를 이용해서 값을 얻기 위한 것이다.
 
 	@CreationTimestamp

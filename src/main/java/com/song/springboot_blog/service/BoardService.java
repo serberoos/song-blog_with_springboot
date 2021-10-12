@@ -1,5 +1,7 @@
 package com.song.springboot_blog.service;
 
+import com.song.springboot_blog.model.Reply;
+import com.song.springboot_blog.repository.ReplyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,12 +18,24 @@ public class BoardService {
 
     @Autowired
     private BoardRepository boardRepository;
+    @Autowired
+    private ReplyRepository replyRepository;
 
     @Transactional
     public void 글쓰기(Board board, User user) { //title, content
         board.setCount(0);
         board.setUser(user);
         boardRepository.save(board);
+    }
+
+    @Transactional
+    public void 댓글쓰기(User user, int boardId, Reply requestReply) { //title, content]
+        Board board = boardRepository.findById(boardId).orElseThrow(()->{
+            return new IllegalArgumentException("댓글 쓰기 실패 : 게시글 id를 찾을 수 없습니다. ");
+        });
+        requestReply.setUser(user);
+        requestReply.setBoard(board);
+        replyRepository.save(requestReply);
     }
 
     @Transactional(readOnly = true)

@@ -1,5 +1,6 @@
 package com.song.springboot_blog.controller.api;
 
+import com.song.springboot_blog.model.Reply;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -30,6 +31,13 @@ public class BoardApiController {
 	@PutMapping("/api/board/{id}")
 	public ResponseDto<Integer> update(@PathVariable int id, @RequestBody Board board){
 		boardService.글수정하기(id, board);
+		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
+	}
+
+	@PostMapping("/api/board/{boardId}/reply")
+	public ResponseDto<Integer> replySave(@PathVariable int boardId, @RequestBody Reply reply, @AuthenticationPrincipal PrincipalDetail principal) {
+
+		boardService.댓글쓰기(principal.getUser(), boardId, reply);
 		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
 	}
 }
