@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.song.springboot_blog.dto.ReplySaveRequestDto;
 import org.hibernate.annotations.CreationTimestamp;
 
 import lombok.AllArgsConstructor;
@@ -41,4 +42,11 @@ public class Reply { //답변 테이블
 	
 	@CreationTimestamp
 	private Timestamp createDate;
+
+	public void update(User user, Board board, String content){
+		setUser(user);
+		setBoard(board);
+		setContent(content);
+
+	}
 }
