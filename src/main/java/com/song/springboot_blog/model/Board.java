@@ -42,7 +42,8 @@ public class Board {
 						// 테이블을 만들게됨.ORM이 바꿈.
 
 	// 한개의 게시글에 여러 댓글이 존재할 수 있다.
-	@OneToMany(mappedBy = "board", fetch = FetchType.EAGER) // mappedBy가 적혀있으면 연관관계의 주인이 아니다(난 FK가 아니에요) DB에 칼럼을 만들지
+	@OneToMany(mappedBy = "board", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE) // mappedBy가 적혀있으면 연관관계의 주인이 아니다(난 FK가 아니에요) DB에 칼럼을 만들지
+	// Board 게시글을 제거할 때 댓글을 전부 삭제하겠다.
 															// 마세요.
 	// LAZY 전략 필요할 때 들고 와 하지만 Board들고 올때 다른것도 다 들고와야 되기 때문에 EAGER 전략으로 바꾸어주어야 한다.
 	// fetch = FetchType.LAZY => EAGER
