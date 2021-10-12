@@ -1,9 +1,9 @@
 package com.song.springboot_blog.service;
 
 import com.song.springboot_blog.dto.ReplySaveRequestDto;
-import com.song.springboot_blog.model.Reply;
 import com.song.springboot_blog.repository.ReplyRepository;
 import com.song.springboot_blog.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,14 +16,20 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 @Service
+@RequiredArgsConstructor //final은 초기화가 필요한데 이걸 붙이면 자동으로 초기화를 해준다.
 public class BoardService {
+    private final BoardRepository boardRepository;
+    private final ReplyRepository replyRepository;
+
+/*    public BoardService(BoardRepository bRepo, ReplyRepository rRepo){ //@Autowired와 동일 한 것이다.
+        this.boardRepository =bRepo;
+        this.replyRepository=rRepo;
+    }*/
+/*    @Autowired
+    private BoardRepository boardRepository;
 
     @Autowired
-    private BoardRepository boardRepository;
-    @Autowired
-    private UserRepository userRepository;
-    @Autowired
-    private ReplyRepository replyRepository;
+    private ReplyRepository replyRepository;*/
 
 
     @Transactional
@@ -35,7 +41,7 @@ public class BoardService {
 
     @Transactional
     public void 댓글쓰기(ReplySaveRequestDto replySaveRequestDto) {
-        int result = replyRepository.mSave(replySaveRequestDto.getUserId(),replySaveRequestDto.getBoardId(), replySaveRequestDto.getContent());
+        int result = replyRepository.mSave(replySaveRequestDto.getUserId(), replySaveRequestDto.getBoardId(), replySaveRequestDto.getContent());
         System.out.println(result);
 
     }
@@ -56,6 +62,7 @@ public class BoardService {
     public void 글삭제하기(int id) {
         boardRepository.deleteById(id);
     }
+
     @Transactional
     public void 글수정하기(int id, Board requestBoard) {
         Board board = boardRepository.findById((id))
