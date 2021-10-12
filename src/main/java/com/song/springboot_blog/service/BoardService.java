@@ -73,4 +73,9 @@ public class BoardService {
         board.setContent(requestBoard.getContent());
         // 해당 함수로 종료시에 (Service가 종료될 때) 트랜잭션이 종료됩니다. 이때 더티체킹 - 자동 업데이트가 db flush
     }
+
+    @Transactional
+    public void 댓글삭제(int replyId) {
+        replyRepository.deleteById(replyId);
+    }
 }
