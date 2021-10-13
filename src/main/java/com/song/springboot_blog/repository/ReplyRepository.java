@@ -1,5 +1,4 @@
 package com.song.springboot_blog.repository;
-import com.song.springboot_blog.dto.ReplySaveRequestDto;
 import com.song.springboot_blog.model.Reply;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;

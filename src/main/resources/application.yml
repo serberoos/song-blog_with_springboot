@@ -1,5 +1,5 @@
-server:
-  port: 8000
+#server:
+#  port: 8080
   servlet:
     context-path: /
     encoding:
@@ -15,20 +15,26 @@ spring:
       
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/blog?serverTimezone=Asia/Seoul
+    url: jdbc:mysql://song-blog-database:3307/jpa?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
     username: song
-    password: 1q2w3e4r5t!@
+    password: 1234
+    hikari:
+      initialization-fail-timeout: 0
     
   jpa:
+    database-platform: org.hibernate.dialect.MySQL5Dialect
     open-in-view: true
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
       use-new-id-generator-mappings: false
     show-sql: false
+    generate-ddl: true
     properties:
-      hibernate.format_sql: true
+      hibernate:
+        format_sql: true
+
 
   jackson:
     serialization:

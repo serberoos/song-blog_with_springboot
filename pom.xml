@@ -9,7 +9,8 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.song</groupId>
-    <artifactId>blog</artifactId>
+    <packaging>jar</packaging>
+    <artifactId>springboot-song-blog</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>blog</name>
     <description>My First SpringBoot blog</description>
@@ -111,6 +112,30 @@
                         </exclude>
                     </excludes>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>io.fabric8</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>0.37.0</version>
+                <configuration>
+                    <images>
+                        <image>
+                            <name>jae99c/springboot-song-blog</name>
+                            <build>
+                                <dockerFileDir>${basedir}</dockerFileDir>
+                            </build>
+                        </image>
+                    </images>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>docker-build</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>build</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
