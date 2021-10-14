@@ -16,8 +16,8 @@ services:
       - --character-set-server=utf8mb4
       - --collation-server=utf8mb4_unicode_ci
 
-#    ports:
-#      - 3307:3306
+    ports:
+      - 3307:3306
     networks:
       - springboot-song-blog-backend-network
 
@@ -27,14 +27,14 @@ services:
     container_name: springboot-song-blog
     image: jae99c/springboot-song-blog
     ports:
-      - 8080:8080
+      - 8000:8080
 #    links:
 #      - song-blog-database
     depends_on:
       - song-blog-database
 
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://song-blog-database:3306/jpa?useSSL=false&serverTimezone=Asia/Seoul&useLegacyDatetimeCode=false&allowPublicKeyRetrieval=true&characterEncoding=UTF-8
+      SPRING_DATASOURCE_URL: jdbc:mysql://song-blog-database:3307/jpa?useSSL=false&serverTimezone=Asia/Seoul&useLegacyDatetimeCode=false&allowPublicKeyRetrieval=true&characterEncoding=UTF-8
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: 1234
     networks:
