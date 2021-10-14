@@ -3,9 +3,10 @@ version: "3"
 services:
   song-blog-database:
     container_name: song-blog-database
-    image: mysql
+    image: mysql:5.7
     environment:
       MYSQL_DATABASE: jpa
+#      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
       MYSQL_ROOT_PASSWORD: 1234
       MYSQL_USER: song
       MYSQL_PASSWORD: 1234
@@ -15,10 +16,10 @@ services:
       - --character-set-server=utf8mb4
       - --collation-server=utf8mb4_unicode_ci
 
-    ports:
-      - 3307:3306
+#    ports:
+#      - 3307:3306
     networks:
-      - springboot-song-blog-network
+      - springboot-song-blog-backend-network
 
   springboot-song-blog:
     restart: always
@@ -26,18 +27,18 @@ services:
     container_name: springboot-song-blog
     image: jae99c/springboot-song-blog
     ports:
-      - 80:8080
-    links:
-      - song-blog-database
+      - 8080:8080
+#    links:
+#      - song-blog-database
     depends_on:
       - song-blog-database
 
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://song-blog-database:3307/jpa?useSSL=false&serverTimezone=Asia/Seoul&useLegacyDatetimeCode=false&allowPublicKeyRetrieval=true&characterEncoding=UTF-8
+      SPRING_DATASOURCE_URL: jdbc:mysql://song-blog-database:3306/jpa?useSSL=false&serverTimezone=Asia/Seoul&useLegacyDatetimeCode=false&allowPublicKeyRetrieval=true&characterEncoding=UTF-8
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: 1234
     networks:
-      - springboot-song-blog-network
+      - springboot-song-blog-backend-network
 
 networks:
-  springboot-song-blog-network:
+  springboot-song-blog-backend-network:

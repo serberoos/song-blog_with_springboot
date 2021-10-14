@@ -1,44 +1,36 @@
-#server:
-#  port: 8080
+server:
+  port: 8080
   servlet:
     context-path: /
     encoding:
       charset: UTF-8
       enabled: true
       force: true
-    
+song:
+  key: song1234
 spring:
-  mvc:
-    view:
-      prefix: /WEB-INF/views/ # 앞에 붙여주는 경로
-      suffix: .jsp # 뒤에 붙여주는 경로
-      
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://song-blog-database:3307/jpa?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
-    username: song
     password: 1234
-    hikari:
-      initialization-fail-timeout: 0
-    
+    url: "jdbc:mysql://song-blog-database:3306/jpa?serverTimezone=Asia/Seoul&characterEncoding=UTF-8"
+    username: song
+  jackson:
+    serialization:
+      fail-on-empty-beans: false
   jpa:
     database-platform: org.hibernate.dialect.MySQL5Dialect
-    open-in-view: true
+    generate-ddl: true
     hibernate:
       ddl-auto: create
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
       use-new-id-generator-mappings: false
-    show-sql: false
-    generate-ddl: true
+    open-in-view: true
     properties:
       hibernate:
         format_sql: true
-
-
-  jackson:
-    serialization:
-      fail-on-empty-beans: false
-
-song:
-  key: song1234
+    show-sql: false
+  mvc:
+    view:
+      prefix: /WEB-INF/views/
+      suffix: .jsp
