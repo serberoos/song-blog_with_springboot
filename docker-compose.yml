@@ -34,7 +34,7 @@ services:
       - song-blog-database
 
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://song-blog-database:3307/jpa?useSSL=false&serverTimezone=Asia/Seoul&useLegacyDatetimeCode=false&allowPublicKeyRetrieval=true&characterEncoding=UTF-8
+      SPRING_DATASOURCE_URL: jdbc:mysql://song-blog-database:3306/jpa?useSSL=false&serverTimezone=Asia/Seoul&useLegacyDatetimeCode=false&allowPublicKeyRetrieval=true&characterEncoding=UTF-8
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: 1234
     networks:

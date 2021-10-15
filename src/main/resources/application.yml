@@ -1,5 +1,5 @@
 server:
-  port: 8000
+  port: 8080
   servlet:
     context-path: /
     encoding:
@@ -12,7 +12,7 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     password: 1234
-    url: "jdbc:mysql://localhost:3307/jpa?serverTimezone=Asia/Seoul&characterEncoding=UTF-8"
+    url: "jdbc:mysql://song-blog-database:3306/jpa?serverTimezone=Asia/Seoul&characterEncoding=UTF-8"
     username: song
   jackson:
     serialization:
