@@ -6,9 +6,11 @@ java, jsp
 
 ## How to run it
 **TYPE in terminal !!**
-1. docker pull jae99c/springboot-song-blog:latest
-2. docker compose up
+1. git clone https://github.com/serberoos/springboot-song-blog.git
+2. "docker compose up" in 'springboot-song-blog' directory
 3. connect on browser : http://127.0.0.1:8000
+
+
 
 ## Reference
 * docker-hub-url : https://hub.docker.com/repository/docker/jae99c/springboot-song-blog/tags?page=1&ordering=last_updated
