@@ -6,7 +6,7 @@ java, jsp
 
 ## How to run it
 1. git clone https://github.com/serberoos/springboot-song-blog.git
-2. "docker compose up" in 'springboot-song-blog' directory
+2. install docker and type "docker compose up" in 'springboot-song-blog' directory
 3. connect on browser : http://127.0.0.1:8000
 
 
